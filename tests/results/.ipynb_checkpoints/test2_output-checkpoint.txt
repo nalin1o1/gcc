@@ -1,0 +1,19 @@
+        -:    0:Source:test2.c
+        -:    0:Graph:test2.gcno
+        -:    0:Data:test2.gcda
+        -:    0:Runs:1
+        1:    1:int classify(int n) {
+        1:    2:    if (n < 0) {
+        1:    3:    } else if (n == 0) {
+        1:    4:        printf("positive\n");   // executed
+        1:    5:        return 1;
+        1:    6:int sum_up_to(int n) {
+        1:    7:    int total = 0;
+        5:    8:    for (int i = 1; i <= n; i++) {
+        4:    9:        total += i;             // executed n times
+        1:   10:    return total;
+        1:   11:int main() {
+        1:   12:    int r = classify(5);
+        1:   13:    int s = sum_up_to(4);
+        1:   14:    printf("r=%d s=%d\n", r, s);
+        1:   15:    return 0;
