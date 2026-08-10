@@ -3,7 +3,9 @@
 
 Building : 
 
+
 - Install Pre-requisites : ./contrib/download_prerequisites (*run inside the Top Level Directory (gcc) ).
+
 
 Builds in the top level directory are not allowed. Create a separate build directory outside the Top Level Directory for the build itself.
 
@@ -14,7 +16,9 @@ Builds in the top level directory are not allowed. Create a separate build direc
 
 (*To run inside the build directory - gcc-build .)
 
+
 - ../gcc/configure --prefix=$HOME/gcc-install --disable-multilib --enable-languages=c,c++
+
     make -j$(nproc)
     make install
 
@@ -38,4 +42,6 @@ Once the build has completed, gcov can be invoked on a test file (ex. test.c) by
 - The output can be viewed using : 
     cat test.c.gcov
 
+
 The Annotated code should not contain lines that were not executed, such lines would be prefixed with a "####" in an ordinary gcc build in the test.c.gcda . 
+
