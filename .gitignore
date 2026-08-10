@@ -44,6 +44,7 @@ cscope.out
 .clang-tidy
 .clangd
 .cache
+.ipynb_checkpoints/
 compile_commands.json
 
 .gdbinit
