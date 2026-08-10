@@ -1,22 +1,41 @@
-This directory contains the GNU Compiler Collection (GCC).
+- Eliminated lines with zero execution counts.
+- Added line counters to ensure that line numbers remain contiguous irrespective of skipped lines in the printed output (-.c.gcda).
 
-The GNU Compiler Collection is free software.  See the files whose
-names start with COPYING for copying permission.  The manuals, and
-some of the runtime libraries, are under different terms; see the
-individual source files for details.
+Building : 
 
-The directory INSTALL contains copies of the installation information
-as HTML and plain text.  The source of this information is
-gcc/doc/install.texi.  The installation information includes details
-of what is included in the GCC sources and what files GCC installs.
+- Install Pre-requisites : ./contrib/download_prerequisites (*run inside the Top Level Directory (gcc) ).
 
-See the file gcc/doc/gcc.texi (together with other files that it
-includes) for usage and porting information.  An online readable
-version of the manual is in the files gcc/doc/gcc.info*.
+Builds in the top level directory are not allowed. Create a separate build directory outside the Top Level Directory for the build itself.
 
-See http://gcc.gnu.org/bugs/ for how to report bugs usefully.
+(*must not run this command inside the gcov tld itself, must be run in the same parent directory that contains gcov, ex. Desktop etc.)
 
-Copyright years on GCC source files may be listed using range
-notation, e.g., 1987-2012, indicating that every year in the range,
-inclusive, is a copyrightable year that could otherwise be listed
-individually.
+- mkdir gcc-build 
+    cd gcc-build
+
+(*To run inside the build directory - gcc-build .)
+
+- ../gcc/configure --prefix=$HOME/gcc-install --disable-multilib --enable-languages=c,c++
+    make -j$(nproc)
+    make install
+
+Notes :
+
+- gcc requires flex and bison to generate its lexer during the build, to avoid running into errors ensure both have been installed before building : 
+
+    apt install flex
+    apt install bison
+
+- LIBRARY_PATH must not contain a trailing colon or a reference to the current directory.
+
+Running and Testing :
+
+Once the build has completed, gcov can be invoked on a test file (ex. test.c) by running : 
+
+~/gcc-install/bin/gcc --coverage test.c -o test
+    ./test
+    ~/gcc-install/bin/gcov test.c
+    
+- The output can be viewed using : 
+    cat test.c.gcov
+
+The Annotated code should not contain lines that were not executed, such lines would be prefixed with a "####" in an ordinary gcc build in the test.c.gcda . 
